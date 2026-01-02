@@ -32,7 +32,12 @@ export class TaskService {
     const newTask = {
       id: this.task.length + 1,
       title: dto.title,
+      description: dto.description,
+      priority: dto.priority,
+      tags: dto.tags,
       isCompleted: false,
+      password: dto.password,
+      webSiteUrl: dto.webSiteUrl,
     };
     this.task.push(newTask);
     return newTask;
