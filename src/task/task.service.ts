@@ -36,8 +36,6 @@ export class TaskService {
       priority: dto.priority,
       tags: dto.tags,
       isCompleted: false,
-      password: dto.password,
-      webSiteUrl: dto.webSiteUrl,
     };
     this.task.push(newTask);
     return newTask;

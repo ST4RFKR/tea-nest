@@ -6,10 +6,9 @@ import {
   IsOptional,
   IsPositive,
   IsString,
-  IsUrl,
   Length,
-  Matches,
 } from 'class-validator';
+import { StartWidth } from '../decorators/start-width.decorator';
 
 export enum TaskTag {
   WORK = 'work',
@@ -38,19 +37,4 @@ export class CreateTaskDto {
   })
   @IsOptional()
   tags: TaskTag[];
-
-  @IsString({ message: 'Пароль должен быть строкой' })
-  @Length(3, 20, { message: 'Пароль должен быть от 3 до 20 символов' })
-  @Matches(/^(?=.*[A-Z])(?=.*[0-9]).+$/, {
-    message:
-      'Пароль должен содержать хотя бы одну заглавную букву и одну цифру',
-  })
-  password: string;
-
-  @IsUrl(
-    { protocols: ['http', 'https'] },
-    { message: 'Ссылка должна быть валидной' },
-  )
-  @IsOptional()
-  webSiteUrl: string;
 }
