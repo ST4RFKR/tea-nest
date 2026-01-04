@@ -8,13 +8,13 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { StartWidth } from '../decorators/start-width.decorator';
 
 export enum TaskTag {
   WORK = 'work',
   HOME = 'study',
   LEARNING = 'home',
 }
+
 export class CreateTaskDto {
   @IsString({ message: 'Профиль должен быть строкой' })
   @IsNotEmpty({ message: 'Профиль не должен быть пустым' })
