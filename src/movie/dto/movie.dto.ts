@@ -1,9 +1,12 @@
 import {
+  IsArray,
   IsBoolean,
   isBoolean,
   IsInt,
   IsNotEmpty,
+  IsOptional,
   IsString,
+  IsUUID,
   Length,
   Max,
   Min,
@@ -22,4 +25,12 @@ export class MovieDto {
 
   @IsBoolean()
   isPublic: boolean;
+
+  @IsArray()
+  @IsUUID('4', { each: true })
+  actorIds: string[];
+
+  @IsOptional()
+  @IsString()
+  imageUrl: string;
 }

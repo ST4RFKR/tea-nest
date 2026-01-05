@@ -6,6 +6,8 @@ import { MovieModule } from './movie/movie.module';
 import { TaskModule } from './task/task.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getTypeOrmConfig } from './config/typeorm.config';
+import { ReviewModule } from './review/review.module';
+import { ActorModule } from './actor/actor.module';
 
 const typeormConfig = {
   type: 'postgres',
@@ -29,6 +31,8 @@ const typeormConfig = {
     }),
     TaskModule,
     MovieModule,
+    ReviewModule,
+    ActorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
