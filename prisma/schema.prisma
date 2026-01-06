@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "./generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -17,8 +18,8 @@ model Movie {
   isAvailable Boolean @default(false) @map("is_available")
   genre       Genre   @default(ACTION)
 
-  poster   MoviePoster @relation(fields: [posterId], references: [id])
-  posterId String      @unique @map("poster_id")
+  poster   MoviePoster? @relation(fields: [posterId], references: [id])
+  posterId String?      @unique @map("poster_id")
 
   reviews Review[]
   actors  Actor[]  @relation("movie_actors")

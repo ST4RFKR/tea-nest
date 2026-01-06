@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
+import { MovieModule } from './movie/movie.module';
+import { ActorModule } from './actor/actor.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -10,6 +13,9 @@ import { PrismaModule } from './prisma/prisma.module';
       isGlobal: true,
     }),
     PrismaModule,
+    MovieModule,
+    ActorModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -23,8 +23,9 @@ export class MovieDto {
   @Max(new Date().getFullYear())
   releaseYear: number;
 
+  @IsOptional()
   @IsBoolean()
-  isPublic: boolean;
+  isAvailable: boolean;
 
   @IsArray()
   @IsUUID('4', { each: true })
