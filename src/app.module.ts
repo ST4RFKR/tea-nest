@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { ActorModule } from './actor/actor.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
 import { MovieModule } from './movie/movie.module';
-import { ActorModule } from './actor/actor.module';
+import { PrismaModule } from './prisma/prisma.module';
 import { ReviewModule } from './review/review.module';
 
 @Module({
