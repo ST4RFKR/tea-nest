@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { MovieModule } from './movie/movie.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ReviewModule } from './review/review.module';
+import { SerialModule } from './serial/serial.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ReviewModule } from './review/review.module';
     MovieModule,
     ActorModule,
     ReviewModule,
+    SerialModule,
   ],
   controllers: [AppController],
   providers: [AppService],
