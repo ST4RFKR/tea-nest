@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"./generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Movie {\n  id String @id @default(uuid())\n\n  title       String\n  description String?\n  releaseYear Int     @map(\"release_year\")\n  rating      Float   @default(0.0)\n  isAvailable Boolean @default(false) @map(\"is_available\")\n  genre       Genre   @default(ACTION)\n\n  poster   MoviePoster? @relation(fields: [posterId], references: [id])\n  posterId String?      @unique @map(\"poster_id\")\n\n  reviews Review[]\n  actors  Actor[]  @relation(\"movie_actors\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([releaseYear, title])\n  @@map(\"movies\")\n}\n\nmodel MoviePoster {\n  id String @id @default(uuid())\n\n  url String\n\n  movieId String\n  movie   Movie? @relation\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"movie_posters\")\n}\n\nmodel Review {\n  id String @id @default(uuid())\n\n  text   String\n  rating Decimal @default(0.0)\n\n  movie   Movie  @relation(fields: [movieId], references: [id], onDelete: Cascade)\n  movieId String @map(\"movie_id\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"reviews\")\n}\n\nmodel Actor {\n  id String @id @default(uuid())\n\n  name String\n\n  movies Movie[] @relation(\"movie_actors\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"actors\")\n}\n\nenum Genre {\n  ACTION\n  COMEDY\n  DRAMA\n  HORROR\n\n  @@map(\"enum_genre\")\n}\n",
+  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"./generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id String @id @default(uuid())\n\n  email    String @unique\n  password String\n  name     String\n\n  createrAt DateTime @default(now()) @map(\"created_at\")\n  updateAt  DateTime @updatedAt @map(\"update_at\")\n\n  @@map(\"users\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Movie\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"releaseYear\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"release_year\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"isAvailable\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_available\"},{\"name\":\"genre\",\"kind\":\"enum\",\"type\":\"Genre\"},{\"name\":\"poster\",\"kind\":\"object\",\"type\":\"MoviePoster\",\"relationName\":\"MovieToMoviePoster\"},{\"name\":\"posterId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"poster_id\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"MovieToReview\"},{\"name\":\"actors\",\"kind\":\"object\",\"type\":\"Actor\",\"relationName\":\"movie_actors\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"movies\"},\"MoviePoster\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"movieId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"movie\",\"kind\":\"object\",\"type\":\"Movie\",\"relationName\":\"MovieToMoviePoster\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"movie_posters\"},\"Review\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"movie\",\"kind\":\"object\",\"type\":\"Movie\",\"relationName\":\"MovieToReview\"},{\"name\":\"movieId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"movie_id\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"reviews\"},\"Actor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"movies\",\"kind\":\"object\",\"type\":\"Movie\",\"relationName\":\"movie_actors\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"actors\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createrAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updateAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"update_at\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -58,8 +58,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Movies
-   * const movies = await prisma.movie.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    * 
    * Read more in our [docs](https://pris.ly/d/client).
@@ -80,8 +80,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Movies
- * const movies = await prisma.movie.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -175,44 +175,14 @@ export interface PrismaClient<
   }>>
 
       /**
-   * `prisma.movie`: Exposes CRUD operations for the **Movie** model.
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Movies
-    * const movies = await prisma.movie.findMany()
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
     * ```
     */
-  get movie(): Prisma.MovieDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.moviePoster`: Exposes CRUD operations for the **MoviePoster** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MoviePosters
-    * const moviePosters = await prisma.moviePoster.findMany()
-    * ```
-    */
-  get moviePoster(): Prisma.MoviePosterDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.review`: Exposes CRUD operations for the **Review** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Reviews
-    * const reviews = await prisma.review.findMany()
-    * ```
-    */
-  get review(): Prisma.ReviewDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.actor`: Exposes CRUD operations for the **Actor** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Actors
-    * const actors = await prisma.actor.findMany()
-    * ```
-    */
-  get actor(): Prisma.ActorDelegate<ExtArgs, { omit: OmitOpts }>;
+  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

@@ -2,16 +2,12 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { AllExaptionsFilter } from './common/filters/all-exaptions.filters';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
-import { Logger } from './common/middlewares/logger.middleware';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(Logger);
-  app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalFilters(new AllExaptionsFilter('AllExaptionsFilter'));
+  app.use(cookieParser);
 
   const config = new DocumentBuilder()
     .setTitle('Tea-nest')
