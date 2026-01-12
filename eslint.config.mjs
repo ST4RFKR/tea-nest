@@ -35,6 +35,8 @@ export default tseslint.config(
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      'require-await': 'off',
+      '@typescript-eslint/require-await': 'off',
     },
   },
 );

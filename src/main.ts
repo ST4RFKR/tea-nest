@@ -1,22 +1,16 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
-import * as cookieParser from 'cookie-parser';
+import { setupSwagger } from 'utils/swagger.util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(cookieParser);
+  app.use(cookieParser());
 
-  const config = new DocumentBuilder()
-    .setTitle('Tea-nest')
-    .setDescription('The Tea-nest API description')
-    .setVersion('1.0')
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/docs', app, document);
+  setupSwagger(app);
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.PORT ?? 3000);
