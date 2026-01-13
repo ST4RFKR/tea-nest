@@ -37,6 +37,7 @@ export default tseslint.config(
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
       'require-await': 'off',
       '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
     },
   },
 );
