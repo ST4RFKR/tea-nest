@@ -14,9 +14,15 @@ model User {
   email    String @unique
   password String
   name     String
+  role     UserRole @default(USER)
 
   createrAt DateTime @default(now()) @map("created_at")
   updateAt  DateTime @updatedAt @map("update_at")
 
   @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }

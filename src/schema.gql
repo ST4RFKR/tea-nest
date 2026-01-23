@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthModel {
+  accessToken: String!
+}
+
+type Mutation {
+  register(data: RegisterInput!): AuthModel!
+}
+
+type Query {
+  findAll: [User!]!
+}
+
+"""Данные для регистрации пользователя"""
+input RegisterInput {
+  """Почта пользователя"""
+  email: String!
+
+  """Имя пользователя"""
+  name: String!
+
+  """Пароль пользователя"""
+  password: String!
+}
+
+type User {
+  email: String!
+  id: Float!
+  name: String!
+}
