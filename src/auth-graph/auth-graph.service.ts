@@ -138,7 +138,7 @@ export class AuthGraphService {
       domain: this.COOKIE_DOMAIN,
       expires: exp,
       secure: !isDev(this.configService),
-      sameSite: isDev(this.configService) ? 'lax' : 'none',
+      sameSite: 'lax',
     });
   }
 }

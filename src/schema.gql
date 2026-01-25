@@ -6,7 +6,19 @@ type AuthModel {
   accessToken: String!
 }
 
+"""Данные для входа пользователя"""
+input LoginInput {
+  """Почта пользователя"""
+  email: String!
+
+  """Пароль пользователя"""
+  password: String!
+}
+
 type Mutation {
+  login(data: LoginInput!): AuthModel!
+  logout: Boolean!
+  refresh: AuthModel!
   register(data: RegisterInput!): AuthModel!
 }
 
